@@ -1,0 +1,14 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1753686396
+export_presets.cfg::TextFile/TextFile::-1::1753677934::0::1::::<><><>0<>0<><>::
+icon.svg::CompressedTexture2D/CompressedTexture2D::3556474077136370520::1753629171::1753677926::1::::<><><>0<>0<>bdadb75020c7769ad24dee9369dc3fa5<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://android/::1753677104
+::res://config/::1753689288
+config.cfg::TextFile::-1::1753689288::0::1::::<><><>0<>0<><>::
+::res://Helper/::1753689721
+ConfigManager.gd::GDScript::7721958099726960943::1753689291::0::1::::<>Node<><>0<>0<><>::
+ImageServiceHelper.gd::GDScript::548354697281126673::1753689721::0::1::::ImageService<>Node<><>0<>0<><>::
+::res://image_cache/::0
+::res://Scenes/::1753689721
+Menu.tscn::PackedScene::7494594963114372730::1753689721::0::1::::<><><>0<>0<><>::
+::res://Scripts/::1753682122

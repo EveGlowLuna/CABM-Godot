@@ -1,36 +1,13 @@
 # 环境变量文件
 .env
 
-#测试文件
 .kiro/
 .vscode/
 data/history/
 data/memory/
-plan.txt
 backups/
 log.txt
-
-# Python缓存文件
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+.gitignore
 
 # 虚拟环境
 venv/
@@ -43,6 +20,9 @@ env/
 *.swp
 *.swo
 
+# Godot导出模板
+Android/
+
 # 日志文件
 *.log
 
@@ -51,7 +31,7 @@ env/
 *.sqlite3
 
 # 图片缓存
-static/images/cache/
+caches/imgcache/
 
 # 系统文件
 .DS_Store

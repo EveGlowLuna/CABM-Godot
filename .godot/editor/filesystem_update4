@@ -1,0 +1,7 @@
+res://Scenes/Menu.tscn
+res://Helper/ConfigManager.gd
+res://config/config.cfg
+res://Helper/ImageServiceHelper.gd
+res://Helper/ChatServiceHelper.gd
+res://Helper/MemoryHelper.gd
+res://Helper/MemoryService.gd
