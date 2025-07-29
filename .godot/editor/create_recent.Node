@@ -1,8 +1,10 @@
-AnimationPlayer
+SubViewport
 Node
+Polygon2D
+Control
+AnimationPlayer
 TextureButton
 HBoxContainer
-Control
 Panel
 Button
 VBoxContainer
@@ -11,5 +13,3 @@ Label
 CanvasLayer
 Container
 ColorRect
-NinePatchRect
-AudioStreamPlayer

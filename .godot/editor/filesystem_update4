@@ -1,2 +1,4 @@
 res://Scenes/Menu.tscn
 res://Shaders/shadow.gdshader
+res://Scenes/Main.tscn
+res://Scenes/Settings.tscn

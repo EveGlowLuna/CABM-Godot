@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CABM"
-run/main_scene="uid://de1o5b8orulew"
+run/main_scene="uid://b3mhtvrffo81g"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
