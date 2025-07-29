@@ -1,6 +1,2 @@
 res://Scenes/Menu.tscn
-res://characters/SilverWolf.json
-res://Helper/Memerizer.gd
-res://Helper/ChatServiceHelper.gd
-res://config/config.cfg
-res://Helper/ConfigManager.gd
+res://Shaders/shadow.gdshader

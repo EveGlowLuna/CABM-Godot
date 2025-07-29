@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="CABM"
+run/main_scene="uid://de1o5b8orulew"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -18,7 +19,6 @@ config/icon="res://icon.svg"
 
 ConfigManager="*res://Helper/ConfigManager.gd"
 ChatServiceHelper="*res://Helper/ChatServiceHelper.gd"
-ImageServiceHelper="*res://Helper/ImageServiceHelper.gd"
 
 [display]
 

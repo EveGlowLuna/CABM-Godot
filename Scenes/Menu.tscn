@@ -1,3 +1,134 @@
-[gd_scene format=3 uid="uid://de1o5b8orulew"]
+[gd_scene load_steps=12 format=3 uid="uid://de1o5b8orulew"]
 
-[node name="Menu" type="Node2D"]
+[ext_resource type="Shader" uid="uid://bqgvsyqxnnler" path="res://Shaders/shadow.gdshader" id="1_3kf3n"]
+[ext_resource type="Script" uid="uid://cv350c7xk8rds" path="res://Scripts/Menu/animation_player.gd" id="2_6pedr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6pedr"]
+shader = ExtResource("1_3kf3n")
+shader_parameter/speed = 1.2
+shader_parameter/scale = 3.0
+shader_parameter/color_blend_strength = 1.0
+shader_parameter/gradient_smoothness = 1.5
+
+[sub_resource type="Animation" id="Animation_6pedr"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_3kf3n"]
+resource_name = "hover_in"
+
+[sub_resource type="Animation" id="Animation_syfuq"]
+resource_name = "hover_out"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2c3o"]
+_data = {
+&"RESET": SubResource("Animation_6pedr"),
+&"sbtn_hover_in": SubResource("Animation_3kf3n"),
+&"sbtn_hover_out": SubResource("Animation_syfuq")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3kf3n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syfuq"]
+bg_color = Color(0, 0.813228, 0.960432, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2c3o"]
+bg_color = Color(0.0783693, 0.45622, 0.515334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma218"]
+bg_color = Color(0.160784, 0.47451, 1, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6pedr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.5
+offset_top = -93.5
+offset_right = 231.5
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 44
+text = "CABM-Godot"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 31
+text = "Code Afflatus & Beyond Matter"
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+libraries = {
+&"": SubResource("AnimationLibrary_s2c3o")
+}
+script = ExtResource("2_6pedr")
+
+[node name="StartBtn" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 23
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3kf3n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_syfuq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s2c3o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ma218")
+text = "开始"
+
+[node name="QuitBtn" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 23
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3kf3n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_syfuq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s2c3o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ma218")
+text = "设置"
+
+[node name="ExitBtn" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 23
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3kf3n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_syfuq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s2c3o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ma218")
+text = "退出"
+
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/HBoxContainer/StartBtn" to="CanvasLayer/VBoxContainer/HBoxContainer/AnimationPlayer" method="_on_start_btn_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/HBoxContainer/StartBtn" to="CanvasLayer/VBoxContainer/HBoxContainer/AnimationPlayer" method="_on_start_btn_mouse_exited"]
