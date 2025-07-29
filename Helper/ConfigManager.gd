@@ -22,6 +22,8 @@ var batch_size = 1
 var num_inference_steps = 20
 var guidance_scale = 7.5
 
+# [user_config]
+var user_name = "落阳"
 
 #[system_prompts]
 var default = "你需要用一段话（1到5句话）回复用户，禁止换行，禁止使用markdown。每**句**话的开头需要用【】加上当前的心情，且必须是其中之一，**只写序号**：1.平静 2.兴奋 3.愤怒 4.失落"
@@ -69,6 +71,9 @@ func save_config() -> void:
 	config.set_value("image_config", "batch_size", batch_size)
 	config.set_value("image_config", "num_inference_steps", num_inference_steps)
 	config.set_value("image_config", "guidance_scale", guidance_scale)
+	
+	# [user_config]
+	config.set_value("user_config", "user_name", user_name)
 	
 	# [system_prompts]
 	config.set_value("system_prompts", "default", default)
@@ -120,6 +125,9 @@ func get_config() -> void:
 	batch_size = config.get_value("image_config", "batch_size", batch_size)
 	num_inference_steps = config.get_value("image_config", "num_inference_steps", num_inference_steps)
 	guidance_scale = config.get_value("image_config", "guidance_scale", guidance_scale)
+	
+	# [user_config]
+	user_name = config.get_value("user_config", "user_name", user_name)
 	
 	# [system_prompts]
 	default = config.get_value("system_prompts", "default", default)

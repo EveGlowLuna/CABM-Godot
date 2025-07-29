@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://de1o5b8orulew"]
+[gd_scene load_steps=9 format=3 uid="uid://de1o5b8orulew"]
 
 [ext_resource type="Shader" uid="uid://bqgvsyqxnnler" path="res://Shaders/shadow.gdshader" id="1_3kf3n"]
+[ext_resource type="Script" uid="uid://bhupsf55afakk" path="res://Scripts/settings_btn.gd" id="2_6pedr"]
+[ext_resource type="Script" uid="uid://d2jhgcae4dg4p" path="res://Scripts/Menu/start_btn.gd" id="2_syfuq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pedr"]
 shader = ExtResource("1_3kf3n")
@@ -94,8 +96,9 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_syfuq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s2c3o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ma218")
 text = "开始"
+script = ExtResource("2_syfuq")
 
-[node name="QuitBtn" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+[node name="SettingsBtn" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -106,6 +109,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_syfuq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s2c3o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ma218")
 text = "设置"
+script = ExtResource("2_6pedr")
 
 [node name="ExitBtn" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
@@ -118,3 +122,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_syfuq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s2c3o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ma218")
 text = "退出"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/StartBtn" to="CanvasLayer/VBoxContainer/HBoxContainer/StartBtn" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/SettingsBtn" to="CanvasLayer/VBoxContainer/HBoxContainer/SettingsBtn" method="_on_pressed"]
