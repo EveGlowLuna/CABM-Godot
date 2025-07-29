@@ -1,7 +1,6 @@
 res://Scenes/Menu.tscn
-res://Helper/ConfigManager.gd
-res://config/config.cfg
-res://Helper/ImageServiceHelper.gd
+res://characters/SilverWolf.json
+res://Helper/Memerizer.gd
 res://Helper/ChatServiceHelper.gd
-res://Helper/MemoryHelper.gd
-res://Helper/MemoryService.gd
+res://config/config.cfg
+res://Helper/ConfigManager.gd

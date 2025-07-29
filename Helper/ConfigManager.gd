@@ -2,6 +2,7 @@ extends Node
 
 #[chat_config]
 var chat_model = "deepseek-ai/DeepSeek-V3"
+var assistant_model = "Qwen/Qwen3-8B"
 var max_tokens = 4096
 var top_k = 5
 var temperature = 1.0
@@ -49,6 +50,7 @@ func save_config() -> void:
 	# 将各个配置节保存到 ConfigFile 对象中
 	# [chat_config]
 	config.set_value("chat_config", "chat_model", chat_model)
+	config.set_value("chat_config", "assistant_model", assistant_model)
 	config.set_value("chat_config", "max_tokens", max_tokens)
 	config.set_value("chat_config", "top_k", top_k)
 	config.set_value("chat_config", "temperature", temperature)
@@ -99,6 +101,7 @@ func get_config() -> void:
 	# 从 ConfigFile 对象中读取各个配置节
 	# [chat_config]
 	chat_model = config.get_value("chat_config", "chat_model", chat_model)
+	assistant_model = config.get_value("chat_config", "assistant_model", assistant_model)
 	max_tokens = config.get_value("chat_config", "max_tokens", max_tokens)
 	top_k = config.get_value("chat_config", "top_k", top_k)
 	temperature = config.get_value("chat_config", "temperature", temperature)
