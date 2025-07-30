@@ -1,5 +1,371 @@
-[gd_scene format=3 uid="uid://bjlqwtngxaco3"]
+[gd_scene load_steps=9 format=3 uid="uid://bjlqwtngxaco3"]
+
+[ext_resource type="Shader" uid="uid://bqgvsyqxnnler" path="res://Shaders/shadow.gdshader" id="1_flfri"]
+[ext_resource type="Shader" uid="uid://ci7wja5bcanuq" path="res://Shaders/arcylic.gdshader" id="2_yrknh"]
+[ext_resource type="Script" uid="uid://dhbmvy33r01ha" path="res://Scripts/codeedit.gd" id="3_yrknh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1nw0"]
+shader = ExtResource("1_flfri")
+shader_parameter/speed = 1.2
+shader_parameter/scale = 3.0
+shader_parameter/color_blend_strength = 1.0
+shader_parameter/gradient_smoothness = 1.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjqtt"]
+shader = ExtResource("2_yrknh")
+shader_parameter/blur_strength = 1.0
+shader_parameter/global_opacity = 0.3
+shader_parameter/use_noise = true
+shader_parameter/noise_intensity = 0.03
+shader_parameter/noise_scale = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flfri"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yrknh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flfri"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12549, 0.8, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Settings" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_w1nw0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+material = SubResource("ShaderMaterial_mjqtt")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "设置
+编辑选项暂时不可用，但是你可以选择编辑config文件"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CodeEdit" type="CodeEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+wrap_mode = 1
+script = ExtResource("3_yrknh")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ResetAllButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "重置所有内容"
+alignment = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "API Key"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="APIKEY" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer3/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer3/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer3/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "角色名称"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer3/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="CHARACTER" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer3/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer4/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer4/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer4/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "聊天模型"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer4/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="AIMODELCHAT" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer4/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")
+
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer5"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer5/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer5/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer5/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "工具模型"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer5/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="AIMODELTOOL" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer5/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")
+
+[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer6"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer6/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer6/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer6/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "最多Tokens消耗"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer6/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="MAXTOKENS" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer6/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")
+
+[node name="MarginContainer7" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer7"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer7/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer7/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer7/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "获取记忆最多数量"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer7/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="TOPK" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer7/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")
+
+[node name="MarginContainer8" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer8"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer8/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer8/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer8/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "获取记忆最多数量"
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer8/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_flfri")
+
+[node name="TOPK" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer8/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yrknh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_flfri")

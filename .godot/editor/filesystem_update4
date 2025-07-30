@@ -1,7 +1,8 @@
-res://Scenes/Menu.tscn
-res://Shaders/shadow.gdshader
 res://Scenes/Settings.tscn
+res://Shaders/shadow.gdshader
+res://Shaders/arcylic.gdshader
+res://Shaders/Dialog.gdshader
+res://Scripts/codeedit.gd
+res://Scenes/Menu.tscn
 res://Scenes/SceneChanger.tscn
 res://Scenes/Main.tscn
-res://Shaders/Dialog.gdshader
-res://config/config.cfg

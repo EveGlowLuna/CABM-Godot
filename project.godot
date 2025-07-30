@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 ConfigManager="*res://Helper/ConfigManager.gd"
 ChatServiceHelper="*res://Helper/ChatServiceHelper.gd"
+ImageServiceHelper="*res://Helper/ImageServiceHelper.gd"
+InitHelper="*res://Helper/InitHelper.gd"
 
 [display]
 

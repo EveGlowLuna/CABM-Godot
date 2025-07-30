@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnf8mueorwq74"]
+[gd_scene load_steps=17 format=3 uid="uid://dnf8mueorwq74"]
 
 [ext_resource type="Script" uid="uid://c12tpcc2cupsb" path="res://Scripts/MainScene/main.gd" id="1_kln2b"]
 [ext_resource type="Shader" uid="uid://bqgvsyqxnnler" path="res://Shaders/shadow.gdshader" id="1_r150o"]
 [ext_resource type="Shader" uid="uid://p2m1bie3r0i1" path="res://Shaders/Dialog.gdshader" id="2_idj7w"]
+[ext_resource type="Shader" uid="uid://ci7wja5bcanuq" path="res://Shaders/arcylic.gdshader" id="4_rgh2o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_idj7w"]
 shader = ExtResource("1_r150o")
@@ -17,6 +18,77 @@ shader_parameter/gradient_smoothness = 1.5
 shader = ExtResource("2_idj7w")
 shader_parameter/base_color = Color(0.6, 0.8, 1, 1)
 shader_parameter/bottom_alpha = 0.5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kln2b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgh2o"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_pbw6q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 235)]
+}
+
+[sub_resource type="Animation" id="Animation_kln2b"]
+resource_name = "dlg_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-350, 235), Vector2(0, 235)]
+}
+
+[sub_resource type="Animation" id="Animation_rgh2o"]
+resource_name = "dlg_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 235), Vector2(-350, 235)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v1gob"]
+_data = {
+&"RESET": SubResource("Animation_pbw6q"),
+&"dlg_in": SubResource("Animation_kln2b"),
+&"dlg_out": SubResource("Animation_rgh2o")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbw6q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1gob"]
+shader = ExtResource("4_rgh2o")
+shader_parameter/blur_strength = 1.0
+shader_parameter/global_opacity = 0.3
+shader_parameter/use_noise = true
+shader_parameter/noise_intensity = 0.03
+shader_parameter/noise_scale = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rgh2o"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -36,22 +108,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ToolBar" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(0, 65)
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainUI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ToolBar" type="PanelContainer" parent="MainUI"]
+custom_minimum_size = Vector2(0, 65)
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 65.0
 grow_horizontal = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ToolBar"]
+[node name="MarginContainer" type="MarginContainer" parent="MainUI/ToolBar"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ToolBar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUI/ToolBar/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="BackBtn" type="Button" parent="ToolBar/MarginContainer/HBoxContainer"]
+[node name="BackBtn" type="Button" parent="MainUI/ToolBar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 45)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -59,49 +143,48 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 18
 text = "返回"
 
-[node name="Label" type="Label" parent="ToolBar/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MainUI/ToolBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 19
 text = "当前模型："
 
-[node name="OptionButton" type="OptionButton" parent="ToolBar/MarginContainer/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="MainUI/ToolBar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="ToolBar"]
+[node name="Label" type="Label" parent="MainUI/ToolBar"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 27
 text = "CABM"
 
-[node name="MarginContainer2" type="MarginContainer" parent="ToolBar"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainUI/ToolBar"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ToolBar/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUI/ToolBar/MarginContainer2"]
 layout_mode = 2
 
-[node name="ChangeBgBtn" type="Button" parent="ToolBar/MarginContainer2/HBoxContainer"]
+[node name="ChangeBgBtn" type="Button" parent="MainUI/ToolBar/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(100, 45)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 18
 text = "切换场景"
 
-[node name="HistoryBtn" type="Button" parent="ToolBar/MarginContainer2/HBoxContainer"]
+[node name="HistoryBtn" type="Button" parent="MainUI/ToolBar/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(100, 45)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 18
 text = "历史"
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
+[node name="ReplyBar" type="PanelContainer" parent="MainUI"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -111,31 +194,31 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_idj7w")
 
-[node name="ColorRect2" type="ColorRect" parent="PanelContainer"]
+[node name="ColorRect2" type="ColorRect" parent="MainUI/ReplyBar"]
 material = SubResource("ShaderMaterial_kln2b")
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainUI/ReplyBar"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ReplyContain" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="ReplyContain" type="VBoxContainer" parent="MainUI/ReplyBar/MarginContainer"]
 layout_mode = 2
 
-[node name="CharacterNameLabel" type="Label" parent="PanelContainer/MarginContainer/ReplyContain"]
+[node name="CharacterNameLabel" type="Label" parent="MainUI/ReplyBar/MarginContainer/ReplyContain"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "<Character_Name>"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/ReplyContain"]
+[node name="MarginContainer" type="MarginContainer" parent="MainUI/ReplyBar/MarginContainer/ReplyContain"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/ReplyContain/MarginContainer"]
+[node name="ReturnMsgLabel" type="Label" parent="MainUI/ReplyBar/MarginContainer/ReplyContain/MarginContainer"]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 size_flags_vertical = 3
@@ -144,4 +227,103 @@ text = "This is a test message"
 autowrap_mode = 3
 max_lines_visible = 6
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="MsgBar" type="PanelContainer" parent="MainUI"]
+custom_minimum_size = Vector2(350, 250)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -125.0
+offset_right = 350.0
+offset_bottom = 125.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI/MsgBar"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUI/MsgBar/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "说点什么...."
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainUI/MsgBar/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainUI/MsgBar/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SendMsgBtn" type="Button" parent="MainUI/MsgBar/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kln2b")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rgh2o")
+text = "发送(Enter)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainUI/MsgBar"]
+libraries = {
+&"": SubResource("AnimationLibrary_v1gob")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="MainUI"]
+position = Vector2(635, 394)
+
+[node name="HistoryUI" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="HistoryUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pbw6q")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="HistoryUI/PanelContainer"]
+material = SubResource("ShaderMaterial_v1gob")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HistoryUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HistoryUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HistoryUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HistoryUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "历史对话"
+
+[node name="Panel" type="Panel" parent="HistoryUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rgh2o")
+
+[node name="ExitHistoryBtn" type="Button" parent="HistoryUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "退出 (Esc)"
+
+[node name="MarginContainer" type="MarginContainer" parent="HistoryUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+
+[node name="ItemList" type="ItemList" parent="HistoryUI/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="resized" from="ColorRect" to="." method="_on_color_rect_resized"]

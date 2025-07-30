@@ -81,7 +81,7 @@ func generate_image(config = null):
 	var body = result[3]
 	
 	if response_code != 200:
-		return handle_generation_error("API错误，状态码： %d" % response_code)
+		return handle_generation_error("API错误，状态码： %s" % response_code)
 	
 	var json = JSON.new()
 	var parse_error = json.parse(body.get_string_from_utf8())

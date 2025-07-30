@@ -68,7 +68,7 @@ func get_complete_response(messages: Array, model: String = ConfigManager.chat_m
 	
 	if error != OK:
 		http_request.queue_free()
-		return "HTTP请求创建失败: %d" % error
+		return "HTTP请求创建失败: %s" % error
 	
 	var result = await http_request.request_completed
 	http_request.queue_free()
