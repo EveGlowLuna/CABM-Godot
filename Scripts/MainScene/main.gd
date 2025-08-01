@@ -7,6 +7,8 @@ extends Control
 @onready var mainui = $MainUI
 @onready var historyui = $HistoryUI
 @onready var histories = $HistoryUI/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/ItemList
+@onready var namelabel = $MainUI/ReplyBar/MarginContainer/ReplyContain/CharacterNameLabel
+@onready var messagelabel = $MainUI/ReplyBar/MarginContainer/ReplyContain/MarginContainer/ReturnMsgLabel
 
 var texture
 var is_returning = false
@@ -49,6 +51,20 @@ func _on_ready() -> void:
 		print("高度", character.texture.get_height() * character.scale.y)
 		character.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y - max_height / 2)
 		print(character.position)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ENTER:
+			# 处理发送消息的逻辑
+			if is_returning and not is_finished:
+				pass
+			else:
+				send_message()
+
+func send_message():
+	# 你说得对，但是此次提交我并不想完成这个函数。
+	pass
+
 
 func _on_color_rect_resized() -> void:
 	if texture:
